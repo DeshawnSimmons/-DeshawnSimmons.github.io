@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deshawn Simmons | Software Engineer & Game Developer</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts: Inter & JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0fdfa',
+                            100: '#ccfbf1',
+                            400: '#2dd4bf',
+                            500: '#14b8a6',
+                            600: '#0d9488',
+                            900: '#134e4a',
+                            cyan: '#06b6d4',
+                            purple: '#8b5cf6',
+                            accent: '#6366f1'
+                        },
+                        darkbg: '#0a0d14',
+                        darkcard: '#121824',
+                        darkborder: '#1f293d'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Glowing and Background FX */
+        body {
+            background-color: #0a0d14;
+            color: #f3f4f6;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .glow-effect {
+            position: relative;
+        }
+        .glow-effect::before {
+            content: '';
+            position: absolute;
+            top: -2px; left: -2px; right: -2px; bottom: -2px;
+            background: linear-gradient(45deg, #06b6d4, #6366f1, #8b5cf6);
+            border-radius: inherit;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .glow-effect:hover::before {
+            opacity: 1;
+        }
+
+        .bg-grid-pattern {
+            background-size: 30px 30px;
+            background-image: 
+                linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0a0d14;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1f293d;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #06b6d4;
+        }
+    </style>
+</head>
+<body class="bg-darkbg text-gray-200 antialiased selection:bg-brand-500 selection:text-white bg-grid-pattern">
+
+    <!-- Header / Navigation -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-darkbg/80 backdrop-blur-md border-b border-darkborder/60">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo -->
+                <a href="#hero" class="flex items-center space-x-2 text-xl font-bold tracking-tight text-white group">
+                    <span class="text-brand-400 font-mono group-hover:text-brand-cyan transition-colors">&lt;DS&gt;</span>
+                    <span>Deshawn Simmons</span>
+                </a>
+
+                <!-- Desktop Nav Links -->
+                <nav class="hidden md:flex items-center space-x-8 text-sm font-medium">
+                    <a href="#about" class="text-gray-300 hover:text-brand-400 transition-colors">About</a>
+                    <a href="#skills" class="text-gray-300 hover:text-brand-400 transition-colors">Skills</a>
+                    <a href="#projects" class="text-gray-300 hover:text-brand-400 transition-colors">Projects</a>
+                    <a href="#experience" class="text-gray-300 hover:text-brand-400 transition-colors">Experience</a>
+                    <a href="#education" class="text-gray-300 hover:text-brand-400 transition-colors">Education</a>
+                    <a href="#github-deploy" class="text-brand-400 hover:text-brand-300 transition-colors flex items-center gap-1.5 font-mono text-xs bg-brand-500/10 px-3 py-1.5 rounded-full border border-brand-500/30">
+                        <i class="fa-brands fa-github"></i> Deploy to GitHub Pages
+                    </a>
+                </nav>
+
+                <!-- Action Button -->
+                <div class="hidden md:flex items-center space-x-4">
+                    <a href="#contact" class="px-4 py-2 text-sm font-medium text-darkbg bg-brand-400 hover:bg-brand-500 rounded-lg transition-all shadow-lg shadow-brand-400/20 font-semibold">
+                        Get In Touch
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" type="button" class="text-gray-400 hover:text-white p-2 rounded-md focus:outline-none">
+                        <i class="fa-solid fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-darkcard border-b border-darkborder px-4 pt-2 pb-6 space-y-3">
+            <a href="#about" class="mobile-link block text-gray-300 hover:text-brand-400 py-2">About</a>
+            <a href="#skills" class="mobile-link block text-gray-300 hover:text-brand-400 py-2">Skills</a>
+            <a href="#projects" class="mobile-link block text-gray-300 hover:text-brand-400 py-2">Projects</a>
+            <a href="#experience" class="mobile-link block text-gray-300 hover:text-brand-400 py-2">Experience</a>
+            <a href="#education" class="mobile-link block text-gray-300 hover:text-brand-400 py-2">Education</a>
+            <a href="#github-deploy" class="mobile-link block text-brand-400 font-mono text-xs py-2">Hosting Guide (GitHub Pages)</a>
+            <a href="#contact" class="mobile-link block text-center px-4 py-2 text-sm font-semibold text-darkbg bg-brand-400 rounded-lg">Get In Touch</a>
+        </div>
+    </header>
+
+    <main class="pt-20">
+
+        <!-- Hero Section -->
+        <section id="hero" class="relative min-h-[90vh] flex items-center justify-center py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
+            <!-- Glow background spheres -->
+            <div class="absolute top-1/4 left-1/2 -translate-x-1/2 w-96 h-96 bg-brand-500/10 blur-[120px] rounded-full pointer-events-none"></div>
+            <div class="absolute bottom-10 right-10 w-72 h-72 bg-brand-purple/10 blur-[100px] rounded-full pointer-events-none"></div>
+
+            <div class="max-w-5xl mx-auto text-center relative z-10">
+                <!-- Status Badge -->
+                <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-darkcard border border-darkborder text-xs font-mono text-brand-400 mb-8 shadow-inner">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+                    <span>CS Student & Game Developer @ Georgia Southern</span>
+                </div>
+
+                <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white mb-6">
+                    Hi, I'm <span class="bg-gradient-to-r from-brand-400 via-brand-cyan to-brand-purple bg-clip-text text-transparent">Deshawn Simmons</span>
+                </h1>
+
+                <p class="text-lg sm:text-xl text-gray-400 max-w-3xl mx-auto mb-10 leading-relaxed font-normal">
+                    Software Engineer specialized in <span class="text-white font-medium">full-stack web/mobile application development</span> and <span class="text-white font-medium">systems-level game programming</span>. Passionate about procedural generation, server-authoritative architecture, and building scalable cloud-backed tools.
+                </p>
+
+                <!-- Action Buttons -->
+                <div class="flex flex-wrap items-center justify-center gap-4 mb-14">
+                    <a href="#projects" class="px-6 py-3.5 rounded-xl bg-gradient-to-r from-brand-500 to-brand-cyan text-darkbg font-bold shadow-lg shadow-brand-500/25 hover:opacity-95 transition-all flex items-center gap-2">
+                        <i class="fa-solid fa-code text-sm"></i> View Featured Work
+                    </a>
+                    <button onclick="toggleModal('resume-modal')" class="px-6 py-3.5 rounded-xl bg-darkcard hover:bg-darkcard/80 border border-darkborder text-gray-200 font-medium transition-all flex items-center gap-2 hover:border-brand-400/50">
+                        <i class="fa-solid fa-file-arrow-down text-brand-400"></i> View Resume Details
+                    </button>
+                    <button onclick="copyToClipboard('Deshawnsimmons0@gmail.com')" class="px-6 py-3.5 rounded-xl bg-darkcard hover:bg-darkcard/80 border border-darkborder text-gray-200 font-medium transition-all flex items-center gap-2 hover:border-brand-400/50">
+                        <i class="fa-regular fa-copy text-brand-cyan"></i> Copy Email
+                    </button>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="flex items-center justify-center space-x-6 text-gray-400">
+                    <a href="mailto:Deshawnsimmons0@gmail.com" class="hover:text-brand-400 transition-colors text-xl" title="Email"><i class="fa-solid fa-envelope"></i></a>
+                    <a href="https://linkedin.com" target="_blank" rel="noopener" class="hover:text-brand-400 transition-colors text-xl" title="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+                    <a href="https://github.com" target="_blank" rel="noopener" class="hover:text-brand-400 transition-colors text-xl" title="GitHub"><i class="fa-brands fa-github"></i></a>
+                    <span class="text-darkborder">|</span>
+                    <span class="text-xs font-mono text-gray-500"><i class="fa-solid fa-location-dot text-brand-400 mr-1"></i> Statesboro / Remote</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Summary Section -->
+        <section id="about" class="py-16 bg-darkcard/30 border-y border-darkborder/50">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
+                    <!-- Bio Card -->
+                    <div class="md:col-span-2 bg-darkcard p-8 rounded-2xl border border-darkborder relative overflow-hidden flex flex-col justify-between">
+                        <div class="absolute top-0 right-0 w-32 h-32 bg-brand-500/5 rounded-bl-full pointer-events-none"></div>
+                        <div>
+                            <h2 class="text-2xl font-bold text-white mb-4 flex items-center gap-2">
+                                <i class="fa-solid fa-user-gear text-brand-400 text-xl"></i> Software Engineering & Game Architecture
+                            </h2>
+                            <p class="text-gray-300 leading-relaxed mb-4">
+                                Currently pursuing a Bachelor of Science in Computer Science with a Game Programming Certificate at Georgia Southern University (Expected May 2028). 
+                            </p>
+                            <p class="text-gray-400 leading-relaxed text-sm">
+                                My software background bridges client-side application design and deep technical infrastructure—ranging from building cross-platform React Native apps with real-time Socket.io communication and Stripe payment infrastructure, to authoring highly optimized multiplayer service layers and 9,700+ part procedural terrain pipelines in Luau and C#/.NET.
+                            </p>
+                        </div>
+                        <div class="mt-6 pt-6 border-t border-darkborder/60 flex flex-wrap gap-4 text-xs font-mono text-gray-400">
+                            <div><strong class="text-white">Degree:</strong> B.S. Computer Science</div>
+                            <div><strong class="text-white">Focus:</strong> Game Programming & Full-Stack</div>
+                            <div><strong class="text-white">Location:</strong> Statesboro, GA</div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Metrics / Highlights -->
+                    <div class="bg-darkcard p-8 rounded-2xl border border-darkborder flex flex-col justify-between space-y-4">
+                        <h3 class="text-lg font-semibold text-white mb-2">Core Highlights</h3>
+                        
+                        <div class="space-y-4">
+                            <div class="flex items-start gap-3">
+                                <div class="p-2 bg-brand-500/10 rounded-lg text-brand-400 mt-1"><i class="fa-solid fa-layer-group"></i></div>
+                                <div>
+                                    <div class="text-white font-semibold text-sm">Multiplayer Systems</div>
+                                    <div class="text-gray-400 text-xs">Server-authoritative state sync & 10-plot ownership mechanics.</div>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start gap-3">
+                                <div class="p-2 bg-brand-cyan/10 rounded-lg text-brand-cyan mt-1"><i class="fa-solid fa-mobile-screen"></i></div>
+                                <div>
+                                    <div class="text-white font-semibold text-sm">Full-Stack Mobile & Web</div>
+                                    <div class="text-gray-400 text-xs">React Native, GraphQL, Express, AWS, OAuth2 & PostgreSQL.</div>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start gap-3">
+                                <div class="p-2 bg-brand-purple/10 rounded-lg text-brand-purple mt-1"><i class="fa-solid fa-chalkboard-user"></i></div>
+                                <div>
+                                    <div class="text-white font-semibold text-sm">Mentorship & Teaching</div>
+                                    <div class="text-gray-400 text-xs">Girls Who Code Specialist & Techie Camp STEM Instructor.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Technical Skills Section -->
+        <section id="skills" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <h2 class="text-3xl font-extrabold text-white mb-3">Technical Toolkit</h2>
+                <p class="text-gray-400 text-sm">Technologies, programming languages, and frameworks I use to build robust software systems.</p>
+            </div>
+
+            <!-- Filter Buttons -->
+            <div class="flex flex-wrap justify-center gap-2 mb-10" id="skill-filters">
+                <button onclick="filterSkills('all')" class="skill-filter-btn active px-4 py-2 rounded-lg text-xs font-mono bg-brand-500 text-darkbg font-bold transition-all">All Skills</button>
+                <button onclick="filterSkills('languages')" class="skill-filter-btn px-4 py-2 rounded-lg text-xs font-mono bg-darkcard border border-darkborder text-gray-300 hover:border-brand-400 transition-all">Languages</button>
+                <button onclick="filterSkills('frameworks')" class="skill-filter-btn px-4 py-2 rounded-lg text-xs font-mono bg-darkcard border border-darkborder text-gray-300 hover:border-brand-400 transition-all">Frameworks & Web</button>
+                <button onclick="filterSkills('tools')" class="skill-filter-btn px-4 py-2 rounded-lg text-xs font-mono bg-darkcard border border-darkborder text-gray-300 hover:border-brand-400 transition-all">Cloud, Tools & OS</button>
+            </div>
+
+            <!-- Skills Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" id="skills-grid">
+                
+                <!-- Category 1: Languages -->
+                <div class="skill-card bg-darkcard p-6 rounded-xl border border-darkborder hover:border-brand-400/50 transition-all" data-category="languages">
+                    <div class="flex items-center gap-3 mb-4 text-brand-400">
+                        <i class="fa-solid fa-code text-2xl"></i>
+                        <h3 class="font-bold text-white text-lg">Languages</h3>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 bg-darkbg border border-darkborder rounded-md text-xs font-mono text-gray-300">Luau</span>
+                        <span class="px-3 py-1 bg-darkbg border border-darkborder rounded-md text-xs font-mono text-gray-300">Java</span>
+                        <span class="px-3 py-1 bg-darkbg border border-darkborder rounded-md text-xs font-mono text-gray-300">C# / .NET</span>
+                        <span class="px-3 py-1 bg-darkbg border border-darkborder rounded-md text-xs font-mono text-gray-300">Python</span>
+                        <span class="px-3 py-1 bg-darkbg border border-darkborder rounded-md text-xs font-mono text-gray-300">Swift</span>
+                        <span class="px-3 py-1 bg-darkbg border border-darkborder rounded-md text-xs font-mono text-gray-300">Bash</span>
+                    </div>
+                </div>
+
+                <!-- Category 2: Frameworks & Frontend/Backend -->
+                <div class="skill-card bg-darkcard p-6 rounded-xl border border-darkborder hover:border-brand-cyan/50 transition-all" data-category="frameworks">
+                    <div class="flex items-center gap-3 mb-4 text-brand-cyan">
+                        <i class="fa-solid fa-cubes text-2xl"></i>
+                        <h3 class="font-bold text-white text-lg">Frameworks & Web</h3>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 bg-darkbg border border-darkborder rounded-md text-xs font-mono text-gray-300">React</span>
+                        <span class="px-3 py-1 bg-darkbg border border-darkborder rounded-md text-xs font-mono text-gray-300">React Native</span>
+                        <span class="px-3 py-1 bg-darkbg border border-darkborder rounded-md text-xs font-mono text-gray-300">Node.js</span>
+                        <span class="px-3 py-1 bg-darkbg border border-darkborder rounded-md text-xs font-mono text-gray-300">Express</span>
+                        <span class="px-3 py-1 bg-darkbg border border-darkborder rounded-md text-xs font-mono text-gray-300">Redux</span>
+                        <span class="px-3 py-1 bg-darkbg border border-darkborder rounded-md text-xs font-mono text-gray-300">GraphQL</span>
+                        <span class="px-3 py-1 bg-darkbg border border-darkborder rounded-md text-xs font-mono text-gray-300">Socket.io</span>
+                    </div>
+                </div>
+
+                <!-- Category 3: Databases & Storage -->
+                <div class="skill-card bg-darkcard p-6 rounded-xl border border-darkborder hover:border-brand-purple/50 transition-all" data-category="frameworks">
+                    <div class="flex items-center gap-3 mb-4 text-brand-purple">
+                        <i class="fa-solid fa-database text-2xl"></i>
+                        <h3 class="font-bold text-white text-lg">Databases & API</h3>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 bg-darkbg border border-darkborder rounded-md text-xs font-mono text-gray-300">PostgreSQL</span>
+                        <span class="px-3 py-1 bg-darkbg border border-darkborder rounded-md text-xs font-mono text-gray-300">MongoDB</span>
+                        <span class="px-3 py-1 bg-darkbg border border-darkborder rounded-md text-xs font-mono text-gray-300">OAuth2</span>
+                        <span class="px-3 py-1 bg-darkbg border border-darkborder rounded-md text-xs font-mono text-gray-300">Stripe API</span>
+                        <span class="px-3 py-1 bg-darkbg border border-darkborder rounded-md text-xs font-mono text-gray-300">REST APIs</span>
+                    </div>
+                </div>
+
+                <!-- Category 4: Cloud, Tools & Platforms -->
+                <div class="skill-card bg-darkcard p-6 rounded-xl border border-darkborder hover:border-emerald-400/50 transition-all" data-category="tools">
+                    <div class="flex items-center gap-3 mb-4 text-emerald-400">
+                        <i class="fa-solid fa-cloud-gear text-2xl"></i>
+                        <h3 class="font-bold text-white text-lg">Tools & Platforms</h3>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 bg-darkbg border border-darkborder rounded-md text-xs font-mono text-gray-300">AWS</span>
+                        <span class="px-3 py-1 bg-darkbg border border-darkborder rounded-md text-xs font-mono text-gray-300">Roblox Studio</span>
+                        <span class="px-3 py-1 bg-darkbg border border-darkborder rounded-md text-xs font-mono text-gray-300">VS Code</span>
+                        <span class="px-3 py-1 bg-darkbg border border-darkborder rounded-md text-xs font-mono text-gray-300">Git / GitHub</span>
+                        <span class="px-3 py-1 bg-darkbg border border-darkborder rounded-md text-xs font-mono text-gray-300">Linux</span>
+                        <span class="px-3 py-1 bg-darkbg border border-darkborder rounded-md text-xs font-mono text-gray-300">Windows 11/10</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="py-20 bg-darkcard/20 border-t border-darkborder/50 px-4 sm:px-6 lg:px-8">
+            <div class="max-w-7xl mx-auto">
+                <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+                    <div>
+                        <div class="text-brand-400 font-mono text-xs uppercase tracking-widest mb-2">// Featured Work</div>
+                        <h2 class="text-3xl font-extrabold text-white">Featured Project Architecture</h2>
+                    </div>
+                    <p class="text-gray-400 text-sm max-w-md mt-2 md:mt-0">High-performance multiplayer games and backend infrastructure built with precision.</p>
+                </div>
+
+                <!-- Primary Featured Card: Forest to Riches Luau -->
+                <div class="bg-darkcard rounded-2xl border border-darkborder overflow-hidden hover:border-brand-400/40 transition-all shadow-2xl">
+                    <div class="grid grid-cols-1 lg:grid-cols-12">
+                        
+                        <!-- Details Panel -->
+                        <div class="lg:col-span-7 p-8 sm:p-10 flex flex-col justify-between">
+                            <div>
+                                <div class="flex items-center gap-3 mb-3">
+                                    <span class="px-2.5 py-1 rounded bg-brand-500/10 text-brand-400 font-mono text-xs border border-brand-500/30">Roblox Studio / Luau</span>
+                                    <span class="px-2.5 py-1 rounded bg-purple-500/10 text-purple-400 font-mono text-xs border border-purple-500/30">Multiplayer Systems</span>
+                                    <span class="text-gray-500 font-mono text-xs">Oct 2026</span>
+                                </div>
+
+                                <h3 class="text-2xl sm:text-3xl font-bold text-white mb-4">Forest to Riches Luau</h3>
+                                <p class="text-gray-300 text-sm leading-relaxed mb-6">
+                                    Architected a complex multiplayer game experience in Luau focused on custom data persistence, vehicle/shop ecosystems, and large-scale procedural world design.
+                                </p>
+
+                                <div class="space-y-3 mb-8 text-sm text-gray-300">
+                                    <div class="flex items-start gap-2.5">
+                                        <i class="fa-solid fa-check text-brand-400 mt-1 text-xs"></i>
+                                        <span><strong>Server-Authoritative Service Layer:</strong> Built dynamic modular architecture governing data persistence, plot assignment, vehicle mechanics, and progression logic.</span>
+                                    </div>
+                                    <div class="flex items-start gap-2.5">
+                                        <i class="fa-solid fa-check text-brand-400 mt-1 text-xs"></i>
+                                        <span><strong>Procedural Generation Pipeline:</strong> Designed a pipeline generating a 9,700-part world (terrain, roads, buildings) with an optimized 3-second rebuild cycle.</span>
+                                    </div>
+                                    <div class="flex items-start gap-2.5">
+                                        <i class="fa-solid fa-check text-brand-400 mt-1 text-xs"></i>
+                                        <span><strong>State Synchronization & Ownership:</strong> Implemented per-player state sync using Remote Events with a server-validated 10-plot ownership allocation system.</span>
+                                    </div>
+                                    <div class="flex items-start gap-2.5">
+                                        <i class="fa-solid fa-check text-brand-400 mt-1 text-xs"></i>
+                                        <span><strong>Automated Testing & Debugging:</strong> Created automated boot-time self-tests and measurement-driven debugging tools (raycasts, custom state inspection, event loggers) resolving root-cause networking and physics range-check bugs.</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="pt-6 border-t border-darkborder/60 flex flex-wrap items-center justify-between gap-4">
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="px-2.5 py-1 rounded bg-darkbg text-gray-400 font-mono text-xs">Luau</span>
+                                    <span class="px-2.5 py-1 rounded bg-darkbg text-gray-400 font-mono text-xs">Roblox Engine</span>
+                                    <span class="px-2.5 py-1 rounded bg-darkbg text-gray-400 font-mono text-xs">Procedural Gen</span>
+                                    <span class="px-2.5 py-1 rounded bg-darkbg text-gray-400 font-mono text-xs">Remote Events</span>
+                                </div>
+                                <button onclick="toggleModal('project-detail-modal')" class="text-brand-400 hover:text-brand-300 text-xs font-mono font-semibold flex items-center gap-1.5">
+                                    View Architecture Details <i class="fa-solid fa-arrow-right"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Technical Visual / Code Graphic -->
+                        <div class="lg:col-span-5 bg-darkbg/80 p-6 sm:p-8 border-t lg:border-t-0 lg:border-l border-darkborder flex flex-col justify-center font-mono text-xs">
+                            <div class="flex items-center justify-between mb-4 pb-2 border-b border-darkborder text-gray-400">
+                                <span class="text-brand-400"><i class="fa-solid fa-terminal mr-2"></i>ServerService.luau</span>
+                                <span class="text-gray-600">9,700 Parts Gen</span>
+                            </div>
+                            <pre class="text-gray-300 overflow-x-auto leading-relaxed bg-black/40 p-4 rounded-xl border border-darkborder/50"><code class="text-gray-300"><span class="text-purple-400">local</span> ServerService = {}
+<span class="text-purple-400">local</span> PlotManager = <span class="text-brand-cyan">require</span>(Services.PlotManager)
+
+<span class="text-gray-500">-- Automated Self-Tests on Init</span>
+<span class="text-purple-400">function</span> ServerService:<span class="text-blue-400">Init</span>()
+    self:<span class="text-blue-400">RunSelfTests</span>()
+    PlotManager:<span class="text-blue-400">Initialize10PlotSystem</span>()
+<span class="text-purple-400">end</span>
+
+<span class="text-gray-500">-- Procedural Pipeline (~9700 parts in 3s)</span>
+<span class="text-purple-400">function</span> ServerService:<span class="text-blue-400">BuildProceduralTerrain</span>()
+    <span class="text-purple-400">local</span> startTime = <span class="text-brand-cyan">os.clock</span>()
+    TerrainPipeline:<span class="text-blue-400">Generate</span>({
+        Seed = 42,
+        MaxParts = 9700,
+        Features = { <span class="text-emerald-400">"Roads"</span>, <span class="text-emerald-400">"Terrain"</span>, <span class="text-emerald-400">"Buildings"</span> }
+    })
+    <span class="text-brand-cyan">print</span>(<span class="text-emerald-400">"Generated in: "</span> .. (<span class="text-brand-cyan">os.clock</span>() - startTime) .. <span class="text-emerald-400">"s"</span>)
+<span class="text-purple-400">end</span></code></pre>
+                            
+                            <div class="mt-4 grid grid-cols-2 gap-3 text-center">
+                                <div class="bg-darkcard p-3 rounded-lg border border-darkborder">
+                                    <div class="text-brand-400 font-bold text-lg">9,700</div>
+                                    <div class="text-[10px] text-gray-400 uppercase">World Parts Generated</div>
+                                </div>
+                                <div class="bg-darkcard p-3 rounded-lg border border-darkborder">
+                                    <div class="text-brand-cyan font-bold text-lg">&lt; 3.0s</div>
+                                    <div class="text-[10px] text-gray-400 uppercase">Rebuild Time</div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section id="experience" class="py-20 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-extrabold text-white mb-3">Work & Leadership Experience</h2>
+                <p class="text-gray-400 text-sm">A timeline of software development roles, instruction, and lab management.</p>
+            </div>
+
+            <!-- Timeline Container -->
+            <div class="relative border-l-2 border-darkborder ml-4 sm:ml-32 space-y-12">
+
+                <!-- Role 1: Software Engineer (Confidential Client) -->
+                <div class="relative pl-8 sm:pl-10 group">
+                    <!-- Date badge for large screens -->
+                    <div class="hidden sm:block absolute -left-32 top-1 text-right w-24 text-xs font-mono text-brand-400">
+                        Dec 2025 -<br>Jul 2026
+                    </div>
+                    <!-- Timeline Node -->
+                    <div class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-darkbg border-2 border-brand-400 group-hover:bg-brand-400 transition-all"></div>
+                    
+                    <div class="bg-darkcard p-6 rounded-xl border border-darkborder hover:border-brand-400/40 transition-all">
+                        <div class="sm:hidden text-xs font-mono text-brand-400 mb-2">Dec 2025 - Jul 2026 | Remote</div>
+                        <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+                            <h3 class="text-xl font-bold text-white">Software Engineer</h3>
+                            <span class="text-xs font-mono px-2.5 py-1 bg-brand-500/10 text-brand-400 rounded-full border border-brand-500/20">Confidential Client</span>
+                        </div>
+                        <div class="text-xs text-gray-400 mb-4 flex items-center gap-1.5">
+                            <i class="fa-solid fa-location-dot"></i> Remote
+                        </div>
+                        <ul class="space-y-2 text-sm text-gray-300 list-disc list-inside">
+                            <li>Assisted in development of a cross-platform mobile app using React Native, Redux, and GraphQL.</li>
+                            <li>Implemented backend services with Node.js, Express, and real-time socket channels via Socket.io.</li>
+                            <li>Managed PostgreSQL databases, cache layers, and integrated secure user authentication using OAuth2.</li>
+                            <li>Integrated Stripe payment processing, push notification queues, and custom user analytics tools.</li>
+                            <li>Deployed scalable infrastructure on Amazon Web Services (AWS) ensuring encrypted, low-latency transmission.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Role 2: Techie Camp Instructor -->
+                <div class="relative pl-8 sm:pl-10 group">
+                    <div class="hidden sm:block absolute -left-32 top-1 text-right w-24 text-xs font-mono text-gray-400">
+                        Jun 2026 -<br>Jun 2026
+                    </div>
+                    <div class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-darkbg border-2 border-brand-cyan group-hover:bg-brand-cyan transition-all"></div>
+
+                    <div class="bg-darkcard p-6 rounded-xl border border-darkborder hover:border-brand-cyan/40 transition-all">
+                        <div class="sm:hidden text-xs font-mono text-brand-cyan mb-2">Jun 2026 | Portal, GA</div>
+                        <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+                            <h3 class="text-xl font-bold text-white">Techie Camp Instructor</h3>
+                            <span class="text-xs font-mono px-2.5 py-1 bg-brand-cyan/10 text-brand-cyan rounded-full border border-brand-cyan/20">TECH CORPS</span>
+                        </div>
+                        <div class="text-xs text-gray-400 mb-4 flex items-center gap-1.5">
+                            <i class="fa-solid fa-location-dot"></i> Portal, GA
+                        </div>
+                        <ul class="space-y-2 text-sm text-gray-300 list-disc list-inside">
+                            <li>Delivered hands-on game programming & robotics instruction to cohorts of 20+ middle school students (grades 6–8).</li>
+                            <li>Created custom teaching modules introducing modern Web Design concepts and Cybersecurity fundamentals.</li>
+                            <li>Coached students using Makeblock Arcade modules to transition learners from block coding to textual code logic and debugging.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Role 3: Lab Assistant -->
+                <div class="relative pl-8 sm:pl-10 group">
+                    <div class="hidden sm:block absolute -left-32 top-1 text-right w-24 text-xs font-mono text-gray-400">
+                        Sep 2025 -<br>Feb 2026
+                    </div>
+                    <div class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-darkbg border-2 border-brand-purple group-hover:bg-brand-purple transition-all"></div>
+
+                    <div class="bg-darkcard p-6 rounded-xl border border-darkborder hover:border-brand-purple/40 transition-all">
+                        <div class="sm:hidden text-xs font-mono text-brand-purple mb-2">Sep 2025 - Feb 2026 | Statesboro, GA</div>
+                        <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+                            <h3 class="text-xl font-bold text-white">Physics & Chemistry Lab Assistant</h3>
+                            <span class="text-xs font-mono px-2.5 py-1 bg-brand-purple/10 text-brand-purple rounded-full border border-brand-purple/20">Georgia Southern University</span>
+                        </div>
+                        <div class="text-xs text-gray-400 mb-4 flex items-center gap-1.5">
+                            <i class="fa-solid fa-location-dot"></i> Statesboro, GA
+                        </div>
+                        <ul class="space-y-2 text-sm text-gray-300 list-disc list-inside">
+                            <li>Prepared, organized, and calibrated complex physics/chemistry lab equipment following strict safety protocols.</li>
+                            <li>Collaborated with university faculty to streamline experiment prep workflows for high-volume lab courses.</li>
+                            <li>Monitored supply inventories and chemical safety labeling across student work sessions.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Role 4: Coding Specialist (Girls Who Code) -->
+                <div class="relative pl-8 sm:pl-10 group">
+                    <div class="hidden sm:block absolute -left-32 top-1 text-right w-24 text-xs font-mono text-gray-400">
+                        Aug 2025 -<br>Dec 2025
+                    </div>
+                    <div class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-darkbg border-2 border-emerald-400 group-hover:bg-emerald-400 transition-all"></div>
+
+                    <div class="bg-darkcard p-6 rounded-xl border border-darkborder hover:border-emerald-400/40 transition-all">
+                        <div class="sm:hidden text-xs font-mono text-emerald-400 mb-2">Aug 2025 - Dec 2025 | Statesboro, GA</div>
+                        <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+                            <h3 class="text-xl font-bold text-white">Coding Specialist</h3>
+                            <span class="text-xs font-mono px-2.5 py-1 bg-emerald-500/10 text-emerald-400 rounded-full border border-emerald-500/20">Girls Who Code Chapter</span>
+                        </div>
+                        <div class="text-xs text-gray-400 mb-4 flex items-center gap-1.5">
+                            <i class="fa-solid fa-location-dot"></i> Georgia Southern University
+                        </div>
+                        <ul class="space-y-2 text-sm text-gray-300 list-disc list-inside">
+                            <li>Co-led weekly technical lessons covering Python, foundational web development, and algorithm design.</li>
+                            <li>Mentored students through hands-on project creation, syntax debugging, and applying computational thinking.</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Education Section -->
+        <section id="education" class="py-20 bg-darkcard/30 border-t border-darkborder/50 px-4 sm:px-6 lg:px-8">
+            <div class="max-w-5xl mx-auto">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-extrabold text-white mb-3">Education & Academic Coursework</h2>
+                    <p class="text-gray-400 text-sm">Academic foundation at Georgia Southern University.</p>
+                </div>
+
+                <div class="bg-darkcard p-8 rounded-2xl border border-darkborder hover:border-brand-400/30 transition-all relative overflow-hidden">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6 pb-6 border-b border-darkborder/60">
+                        <div>
+                            <span class="text-xs font-mono text-brand-400 bg-brand-500/10 px-3 py-1 rounded-full border border-brand-500/20">Degree Candidate</span>
+                            <h3 class="text-2xl font-bold text-white mt-2">Georgia Southern University</h3>
+                            <p class="text-gray-300 font-medium">Bachelor of Science in Computer Science</p>
+                            <p class="text-brand-cyan text-sm"><i class="fa-solid fa-certificate mr-1"></i> Game Programming Certificate</p>
+                        </div>
+                        <div class="text-left md:text-right font-mono text-sm text-gray-400">
+                            <div><i class="fa-solid fa-calendar mr-1"></i> Aug 2024 - May 2028</div>
+                            <div><i class="fa-solid fa-location-dot mr-1"></i> Statesboro, GA</div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h4 class="text-xs font-mono uppercase text-gray-400 tracking-wider mb-3">Related Coursework</h4>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
+                            <div class="bg-darkbg p-3 rounded-lg border border-darkborder text-xs font-mono text-gray-300 flex items-center gap-2">
+                                <i class="fa-solid fa-gamepad text-brand-400"></i> Game Programming
+                            </div>
+                            <div class="bg-darkbg p-3 rounded-lg border border-darkborder text-xs font-mono text-gray-300 flex items-center gap-2">
+                                <i class="fa-solid fa-code-compare text-brand-cyan"></i> Survey of Prog. Languages
+                            </div>
+                            <div class="bg-darkbg p-3 rounded-lg border border-darkborder text-xs font-mono text-gray-300 flex items-center gap-2">
+                                <i class="fa-solid fa-diagram-project text-brand-purple"></i> Data Structures
+                            </div>
+                            <div class="bg-darkbg p-3 rounded-lg border border-darkborder text-xs font-mono text-gray-300 flex items-center gap-2">
+                                <i class="fa-solid fa-square-binary text-emerald-400"></i> Programming Principles I/II
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Deployment Guide Banner / Section -->
+        <section id="github-deploy" class="py-16 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
+            <div class="bg-gradient-to-br from-darkcard via-darkcard to-brand-900/20 p-8 rounded-2xl border border-brand-500/30 relative overflow-hidden">
+                <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+                    <div>
+                        <div class="inline-flex items-center gap-2 text-xs font-mono text-brand-400 mb-2">
+                            <i class="fa-brands fa-github text-base"></i> Hosting on GitHub Pages
+                        </div>
+                        <h3 class="text-2xl font-bold text-white mb-2">Want to put this website live on github.io?</h3>
+                        <p class="text-gray-300 text-sm max-w-2xl leading-relaxed">
+                            This single file HTML setup is 100% ready to deploy for free on GitHub Pages without any build tools or complex frameworks.
+                        </p>
+                    </div>
+                    <button onclick="toggleModal('deploy-modal')" class="px-5 py-3 bg-brand-400 text-darkbg hover:bg-brand-300 font-bold rounded-xl text-sm transition-all shadow-lg whitespace-nowrap">
+                        View Step-by-Step Guide
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-20 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto text-center">
+            <div class="bg-darkcard p-8 sm:p-12 rounded-3xl border border-darkborder relative overflow-hidden">
+                <div class="absolute -bottom-10 -right-10 w-40 h-40 bg-brand-400/10 rounded-full blur-3xl pointer-events-none"></div>
+
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-white mb-4">Let's Build Something Together</h2>
+                <p class="text-gray-300 max-w-xl mx-auto mb-8 text-sm leading-relaxed">
+                    I'm currently seeking software engineering internships, game development roles, and collaborative projects. Feel free to send me an email or connect on LinkedIn!
+                </p>
+
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10">
+                    <a href="mailto:Deshawnsimmons0@gmail.com" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-brand-400 text-darkbg font-bold hover:bg-brand-300 transition-all flex items-center justify-center gap-2 shadow-lg shadow-brand-400/20">
+                        <i class="fa-solid fa-paper-plane"></i> Send Email
+                    </a>
+                    <button onclick="copyToClipboard('Deshawnsimmons0@gmail.com')" class="w-full sm:w-auto px-6 py-4 rounded-xl bg-darkbg border border-darkborder hover:border-brand-400/50 text-white font-medium transition-all flex items-center justify-center gap-2">
+                        <i class="fa-regular fa-copy text-brand-400"></i> Copy Deshawnsimmons0@gmail.com
+                    </button>
+                </div>
+
+                <div class="flex justify-center space-x-6 text-gray-400 text-2xl">
+                    <a href="https://linkedin.com" target="_blank" class="hover:text-brand-400 transition-colors"><i class="fa-brands fa-linkedin"></i></a>
+                    <a href="https://github.com" target="_blank" class="hover:text-brand-400 transition-colors"><i class="fa-brands fa-github"></i></a>
+                    <a href="mailto:Deshawnsimmons0@gmail.com" class="hover:text-brand-400 transition-colors"><i class="fa-solid fa-envelope"></i></a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-8 border-t border-darkborder/60 text-center text-xs text-gray-500 font-mono">
+        <div class="max-w-7xl mx-auto px-4">
+            <p>© 2026 Deshawn Simmons. Designed & Built for GitHub Pages.</p>
+        </div>
+    </footer>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 bg-brand-500 text-darkbg font-bold px-4 py-3 rounded-xl shadow-2xl flex items-center gap-2">
+        <i class="fa-solid fa-circle-check text-darkbg"></i>
+        <span id="toast-message">Copied to clipboard!</span>
+    </div>
+
+    <!-- Resume Modal -->
+    <div id="resume-modal" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-darkcard border border-darkborder w-full max-w-2xl rounded-2xl p-6 sm:p-8 max-h-[90vh] overflow-y-auto">
+            <div class="flex items-center justify-between pb-4 border-b border-darkborder">
+                <h3 class="text-xl font-bold text-white">Deshawn Simmons - Quick Resume View</h3>
+                <button onclick="toggleModal('resume-modal')" class="text-gray-400 hover:text-white p-1"><i class="fa-solid fa-xmark text-xl"></i></button>
+            </div>
+            
+            <div class="py-4 space-y-6 text-sm text-gray-300">
+                <div>
+                    <h4 class="font-bold text-brand-400 font-mono text-xs uppercase tracking-wider mb-1">Education</h4>
+                    <p class="text-white font-semibold">Georgia Southern University — B.S. Computer Science</p>
+                    <p class="text-xs text-gray-400">Game Programming Certificate | Aug 2024 - May 2028</p>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-brand-400 font-mono text-xs uppercase tracking-wider mb-1">Technical Skills Summary</h4>
+                    <p class="text-xs text-gray-300"><strong>Languages:</strong> Java, C#/.NET, Python, Swift, Bash, Luau</p>
+                    <p class="text-xs text-gray-300 mt-1"><strong>Frameworks & Web:</strong> React, React Native, Node.js, Express, Redux, GraphQL, Socket.io</p>
+                    <p class="text-xs text-gray-300 mt-1"><strong>Databases & Cloud:</strong> PostgreSQL, MongoDB, AWS, OAuth2, Stripe API</p>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-brand-400 font-mono text-xs uppercase tracking-wider mb-1">Key Experience</h4>
+                    <p class="text-white font-semibold">Software Engineer (Confidential Client)</p>
+                    <p class="text-xs text-gray-400">React Native app, Express backend, GraphQL, AWS, Socket.io, OAuth2.</p>
+                </div>
+            </div>
+
+            <div class="pt-4 border-t border-darkborder flex justify-end gap-3">
+                <button onclick="toggleModal('resume-modal')" class="px-4 py-2 bg-darkbg border border-darkborder text-gray-300 rounded-lg text-xs font-semibold">Close</button>
+                <a href="mailto:Deshawnsimmons0@gmail.com" class="px-4 py-2 bg-brand-400 text-darkbg rounded-lg text-xs font-bold">Request Full Resume PDF</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Project Detail Modal -->
+    <div id="project-detail-modal" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-darkcard border border-darkborder w-full max-w-3xl rounded-2xl p-6 sm:p-8 max-h-[90vh] overflow-y-auto">
+            <div class="flex items-center justify-between pb-4 border-b border-darkborder">
+                <h3 class="text-xl font-bold text-white">Forest to Riches — Architecture Breakdown</h3>
+                <button onclick="toggleModal('project-detail-modal')" class="text-gray-400 hover:text-white p-1"><i class="fa-solid fa-xmark text-xl"></i></button>
+            </div>
+            
+            <div class="py-6 space-y-6 text-sm text-gray-300">
+                <div class="bg-darkbg p-4 rounded-xl border border-darkborder">
+                    <h4 class="text-brand-400 font-bold text-base mb-2">1. Modular Server-Authoritative Architecture</h4>
+                    <p class="text-xs leading-relaxed text-gray-300">
+                        Designed to prevent client-side exploitation by maintaining state exclusively on the server. Managed data persistence, player progression, shops, and vehicles through modular Luau service layers.
+                    </p>
+                </div>
+
+                <div class="bg-darkbg p-4 rounded-xl border border-darkborder">
+                    <h4 class="text-brand-cyan font-bold text-base mb-2">2. Procedural World Generation</h4>
+                    <p class="text-xs leading-relaxed text-gray-300">
+                        Generates a dense 9,700-part world containing terrain elevation, road networks, and dynamic buildings in under 3 seconds using optimized spatial partitioning.
+                    </p>
+                </div>
+
+                <div class="bg-darkbg p-4 rounded-xl border border-darkborder">
+                    <h4 class="text-brand-purple font-bold text-base mb-2">3. Debugging & Range-Check Diagnostics</h4>
+                    <p class="text-xs leading-relaxed text-gray-300">
+                        Built custom raycast visualizers and network packet loggers to identify and resolve root causes behind range-check physics glitches and duplicate event channel broadcasts.
+                    </p>
+                </div>
+            </div>
+
+            <div class="pt-4 border-t border-darkborder flex justify-end">
+                <button onclick="toggleModal('project-detail-modal')" class="px-5 py-2.5 bg-brand-400 text-darkbg font-bold rounded-xl text-xs">Close Overview</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- GitHub Pages Deployment Modal -->
+    <div id="deploy-modal" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-darkcard border border-darkborder w-full max-w-2xl rounded-2xl p-6 sm:p-8 max-h-[90vh] overflow-y-auto">
+            <div class="flex items-center justify-between pb-4 border-b border-darkborder">
+                <h3 class="text-xl font-bold text-white flex items-center gap-2">
+                    <i class="fa-brands fa-github text-brand-400"></i> Deploying to GitHub Pages
+                </h3>
+                <button onclick="toggleModal('deploy-modal')" class="text-gray-400 hover:text-white p-1"><i class="fa-solid fa-xmark text-xl"></i></button>
+            </div>
+            
+            <div class="py-6 space-y-4 text-sm text-gray-300">
+                <ol class="space-y-4 list-decimal list-inside font-mono text-xs">
+                    <li class="bg-darkbg p-3 rounded-lg border border-darkborder">
+                        <strong class="text-white">Create a GitHub Repository:</strong> Name it <code class="text-brand-400">username.github.io</code> or <code class="text-brand-400">portfolio</code>.
+                    </li>
+                    <li class="bg-darkbg p-3 rounded-lg border border-darkborder">
+                        <strong class="text-white">Save this code:</strong> Save this single file as <code class="text-brand-400">index.html</code> in your project folder.
+                    </li>
+                    <li class="bg-darkbg p-3 rounded-lg border border-darkborder">
+                        <strong class="text-white">Push to GitHub:</strong>
+                        <pre class="mt-2 bg-black/60 p-2 rounded text-gray-400">git init
+git add index.html
+git commit -m "Initial portfolio release"
+git branch -M main
+git remote add origin https://github.com/yourusername/portfolio.git
+git push -u origin main</pre>
+                    </li>
+                    <li class="bg-darkbg p-3 rounded-lg border border-darkborder">
+                        <strong class="text-white">Enable GitHub Pages:</strong> Go to Repository Settings → Pages → Select <code class="text-brand-400">main</code> branch → Save!
+                    </li>
+                </ol>
+            </div>
+
+            <div class="pt-4 border-t border-darkborder flex justify-end">
+                <button onclick="toggleModal('deploy-modal')" class="px-5 py-2.5 bg-brand-400 text-darkbg font-bold rounded-xl text-xs">Got It!</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Interactions -->
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Copy to Clipboard Utility
+        function copyToClipboard(text) {
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+            showToast(`Copied "${text}" to clipboard!`);
+        }
+
+        // Toast Notification
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const toastMsg = document.getElementById('toast-message');
+            toastMsg.innerText = message;
+            
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+
+            setTimeout(() => {
+                toast.classList.remove('translate-y-0', 'opacity-100');
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3000);
+        }
+
+        // Modal Handler
+        function toggleModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.classList.toggle('hidden');
+            }
+        }
+
+        // Skill Filter Functionality
+        function filterSkills(category) {
+            const cards = document.querySelectorAll('.skill-card');
+            const buttons = document.querySelectorAll('.skill-filter-btn');
+
+            buttons.forEach(btn => {
+                btn.classList.remove('bg-brand-500', 'text-darkbg', 'font-bold');
+                btn.classList.add('bg-darkcard', 'text-gray-300');
+            });
+
+            event.target.classList.remove('bg-darkcard', 'text-gray-300');
+            event.target.classList.add('bg-brand-500', 'text-darkbg', 'font-bold');
+
+            cards.forEach(card => {
+                if (category === 'all' || card.dataset.category === category) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>
